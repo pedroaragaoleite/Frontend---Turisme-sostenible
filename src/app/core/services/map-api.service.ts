@@ -25,8 +25,6 @@ export class MapApiService {
     }).addTo(this.map);
   }
 
-<<<<<<< HEAD
-=======
 
   getMap(): L.Map {
     return this.map;
@@ -36,5 +34,4 @@ export class MapApiService {
     return this.http.get<ConcentrationData[]>('/assets/csvjson.json')
   }
 
->>>>>>> 066ad16fa881e9366374aeb3b1e0131065b2e8ad
 }
