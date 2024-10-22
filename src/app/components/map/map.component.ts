@@ -132,12 +132,12 @@ export class MapComponent implements AfterViewInit {
 
       if (heatmapData.length > 0) {
         this.noiseHeatmapLayer = L.heatLayer(heatmapData, {
-          radius: 25,
-          blur: 15,
+          radius: 20,
+          blur: 25,
           maxZoom: 18,
           max: 1,
-          minOpacity: 0.4,
-          gradient: {0.4: 'green', 0.5: 'yellow', 0.6: 'orange', 0.8: 'red', 1: 'purple'}
+          minOpacity: 0.7,
+          gradient: {0.4: 'purple', 0.5: 'magenta', 0.6: 'orange', 0.8: 'red', 1: 'darkred'}
         }).addTo(this.map);
       }
     }
