@@ -8,6 +8,10 @@
 //     background-color: transparent;
 // }
 
+a {
+    color: rgb(9, 216, 37);
+}
+
 header {
     background-color: #222120; 
     //padding: 2px;
@@ -99,23 +103,33 @@ header {
 }
 
 .footer {
-    position: fixed;
-   // bottom: 0;
+  //  position: fixed;
     width: 100%;
-  //  background-color: #F4D35E !important;
-   // color: #f1eeee;
-  //  padding: 10px 0;
     text-align: center;
-  //  z-index: 1000;    
 }
 
 .cust-footer {
     background-color: #222120;
-  //  color: #fff;    
 }
 
 .cust-text {
     color: #fff !important;
 }
+
+//---------------------------------------------------------------------
+
+// @media (min-width: 576px) { ... }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// // X-Large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }
+
+// // XX-Large devices (larger desktops, 1400px and up)
+// @media (min-width: 1400px) { ... }
 
 
