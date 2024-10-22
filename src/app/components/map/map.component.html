@@ -1,13 +1,13 @@
-<header class="bg-english-green text-white py-1">
+<header class="bg-english-green text-white py-2 mb-3">
     <div class="container">
         <h1 class="display-8">Turisme Sostenible</h1>
     </div>  
 </header>
 
-<div id="filters" class="container my-4">
+<div id="filters" class="container my-2">
   <div class="row g-3">
     <div class="col-12 col-md-4">
-      <label for="categoryFilter" class="form-label">Categoria</label>
+      <label for="categoryFilter" class="form-label fw-bold">Categoria</label>
       <select class="form-select" id="categoryFilter" (change)="onCategoryFilterChange($event)">
         <option value="">Todas</option>
         <option value="Centre">Centre</option>
@@ -25,7 +25,7 @@
       </select>
     </div>
     <div class="col-12 col-md-4">
-      <label for="month-select" class="form-label">Mes</label>
+      <label for="month-select" class="form-label fw-bold">Mes</label>
       <select class="form-select" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
         <option value="">Tots els mesos</option>
         <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
@@ -34,7 +34,7 @@
       </select>
     </div>
     <div class="col-12 col-md-4">
-      <label for="weekday-select" class="form-label">Dia de la setmana</label>
+      <label for="weekday-select" class="form-label fw-bold">Dia de la setmana</label>
       <select class="form-select" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
         <option value="">Tots els dies de la setmana</option>
         <option *ngFor="let weekday of weekdays" [value]="weekday">
@@ -45,25 +45,25 @@
   </div>
 </div>
 
-<div id="map" class="mt-4 shadow-sm rounded"></div>
-
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-4 mb-3">
-      <div class="form-check form-switch">
-        <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" checked>
-        <label class="form-check-label" for="flexSwitchPoints">
-          Punts d'interès
-        </label>
+<div class="container my-3">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-4">
+        <div class="form-check form-switch">
+          <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" checked>
+          <label class="form-check-label" for="flexSwitchPoints">
+            Punts d'interès
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="col-12 col-md-4 mb-3">
-      <div class="form-check form-switch">
-        <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" checked>
-        <label class="form-check-label" for="flexSwitchHeatmap">
-          Concentració Turística
-        </label>
+      <div class="col-12 col-md-4 mb-3">
+        <div class="form-check form-switch">
+          <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" checked>
+          <label class="form-check-label" for="flexSwitchHeatmap">
+            Concentració Turística
+          </label>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+<div id="map"></div>

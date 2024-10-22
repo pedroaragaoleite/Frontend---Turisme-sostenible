@@ -1,14 +1,14 @@
 import { Component, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import * as L from 'leaflet';
+import 'leaflet.heat';
+import proj4 from 'proj4';
+
 import { MapApiService } from '../../core/services/map-api.service';
 import { DataFilterService } from '../../core/services/data-filter.service';
-import * as L from 'leaflet';
 import { TourismDataService } from '../../core/services/tourism-data.service';
-import { TourismPoint } from '../../core/interfaces/tourism.interface';
-import proj4 from 'proj4';
-import 'leaflet.heat';
-import { ConcentrationData } from '../../core/interfaces/tourism.interface';
+import { TourismPoint, ConcentrationData } from '../../core/interfaces/tourism.interface';
 
 @Component({
   selector: 'app-map',
@@ -49,7 +49,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   initMap() {
-    this.map = L.map('map').setView([41.3851, 2.1734], 13);
+    this.map = L.map('map').setView([41.3851, 2.1734], 14);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
