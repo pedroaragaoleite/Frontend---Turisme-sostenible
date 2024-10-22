@@ -150,4 +150,16 @@ export class MapComponent implements AfterViewInit {
       this.loadTourismPoints();
     }
   }
+
+  toggleHeatMap(): void {
+    if(!this.showPlaces) {
+      console.log(this.showPlaces);
+      
+      if (this.heatmapLayer) {
+        this.map.removeLayer(this.heatmapLayer);
+      }
+    } else {
+      this.updateHeatmap();
+    }
+  }
 }
