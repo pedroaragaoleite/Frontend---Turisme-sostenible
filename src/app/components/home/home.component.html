@@ -1,3 +1,5 @@
+<div class="d-flex justify-content-between flex-column vh-100">
+
 <header>
 
     <div class="container-fluid">
@@ -14,8 +16,8 @@
                 </div>
 
                 <div class="col d-flex justify-content-center">
-                    <a class="navbar-brand" [routerLink]="'/home'">
-                        <h3>Sustainable Tourism</h3>
+                    <a class="navbar-brand d-flex align-items-center" [routerLink]="'/home'">
+                        <h3>Turisme Sostenible</h3>
                         <img src="assets/img/logo5.png" alt="Sustainable Tourism" width="80">
                     </a>
                 </div>
@@ -39,32 +41,28 @@
         <div class="row">
 
             <nav class="navbar cust-navbar justify-content-center">
-               
+
                 <ul class="navbar-nav flex-row">
-                    <li class="nav-item pe-4 cust-nav-item-1" [routerLinkActive]="['active-border-bottom']"
-                    [routerLinkActiveOptions]="{exact:true}">
-                        <a class="nav-link py-0 ms-3" [routerLink]="['/home']"
-                        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
-                        >HOME</a>
+                    <li class="nav-item pe-4 cust-nav-item" [routerLinkActive]="['active-border-bottom']"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <a class="nav-link py-0 ms-3" [routerLink]="['/home']" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">HOME</a>
                     </li>
-                    <li class="nav-item cust-nav-item-2" [routerLinkActive]="['active-border-bottom']" 
-                         [routerLinkActiveOptions]="{exact:true}">
-                        <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/explore']"
-                        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" 
-                        >EXPLORE</a>
+                    <li class="nav-item cust-nav-item" [routerLinkActive]="['active-border-bottom']"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/explore']" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">EXPLORE</a>
                     </li>
-                    <li class="nav-item cust-nav-item-2" [routerLinkActive]="['active-border-bottom']" 
-                    [routerLinkActiveOptions]="{exact:true}">
-                   <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/sustainability']"
-                   routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" 
-                   >SUSTAINABILITY</a>
-               </li>
-               <li class="nav-item cust-nav-item-2" [routerLinkActive]="['active-border-bottom']" 
-               [routerLinkActiveOptions]="{exact:true}">
-              <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/about']"
-              routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" 
-              >ABOUT</a>
-          </li>
+                    <li class="nav-item cust-nav-item" [routerLinkActive]="['active-border-bottom']"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/sustainability']" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">SUSTAINABILITY</a>
+                    </li>
+                    <li class="nav-item cust-nav-item cust-nav-item-4" [routerLinkActive]="['active-border-bottom']"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <a class="nav-link py-0 ms-3 me-3" [routerLink]="['/about']" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
+                    </li>
                 </ul>
 
             </nav>
@@ -75,17 +73,18 @@
 
 </header>
 
-<app-map/>
+<app-map />
 
-<footer class="footer">
-    <div class="container">
+<footer>
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <p>&copy; 2024 Sustainable Tourism. All rights reserved.</p>
+                <p class="cust-text">&copy; 2024 Sustainable Tourism. All rights reserved.</p>
             </div>
             <div class="col text-end">
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                <a class="cust-text" href="#">Privacy Policy</a> | <a class="cust-text" href="#">Terms of Service</a>
             </div>
         </div>
     </div>
 </footer>
+</div>

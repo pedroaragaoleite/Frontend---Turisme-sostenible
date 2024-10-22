@@ -1,32 +1,36 @@
-.navbar-brand {
-    background-color: transparent;
+
+.container-fluid {
+ background-color: #222120;
+// color: #f1eeee;
 }
 
+// .navbar-brand {
+//     background-color: transparent;
+// }
+
 header {
-    background-color: black;
-    color: #9e9898;
-    padding: 16px;
+    background-color: #222120; 
+    //padding: 2px;
 }
 
 .fab {
-    color: #9e9898;
+    color: #f1eeee;
     margin-top: 16px;
     transition: all 0.2s ease;
     font-size: 1.2rem;
 }
 
 .fab:hover {
-    color: aliceblue;
+   // color: #f1eeee;
     transform: scale(1.4);
 }
 
 .cust-nav-link {
-    color: #9e9898;
+  //  color: #f1eeee;;
     transition: all 0.2s ease;
 }
 
 .cust-nav-link:hover {
-    color: aliceblue;
     transform: scale(1.2);
 }
 
@@ -35,7 +39,7 @@ header {
 }
 
 .slash {
-    color: #4b4848;
+ color: #f1eeee;
 }
 
 .cust-navbar {
@@ -43,29 +47,33 @@ header {
     border-top: 1px solid #4b4848;
     border-bottom: 1px solid #4b4848;
 }
-.cust-nav-item-1, .cust-nav-item-2 {
+.cust-nav-item {
     padding: 6px;
     border-left: 1px solid #4b4848;
 }
 
-.nav-link {
-    color: #9e9898;
-}
-
-.cust-nav-item-2 {
+.cust-nav-item-4 {
     border-right: 1px solid #4b4848;
 }
 
+.nav-link {
+   color: #f1eeee;
+}
+
+.cust-nav-item-2 {
+  color: #f1eeee;
+}
+
 .nav-link:hover {
-    color: aliceblue;
+   color: #f1eeee;
 }
 
 .active {
-    color: aliceblue;
-}
+   color: #f1eeee;
 
+}
 .nav-link.active {
-    color: aliceblue;
+   color: #f1eeee;
     font-weight: 550;
   }
 
@@ -75,12 +83,6 @@ header {
 
 //----------------------------FOOTER--------------------------------------------
 
-
-.footer {
-   // background-color: black;       
-   // color: white;                
-   // padding: 20px 0;              
-}
 
 .footer a {
     color: #fff;               
@@ -92,17 +94,28 @@ header {
 }
 
 .footer p {
-    margin: 0;                   
+    margin: 0;  
+    color: #fff;                     
 }
 
 .footer {
     position: fixed;
-    bottom: 0;
+   // bottom: 0;
     width: 100%;
-    background-color: black;
-    color: white;
-    padding: 10px 0;
+  //  background-color: #F4D35E !important;
+   // color: #f1eeee;
+  //  padding: 10px 0;
     text-align: center;
-    z-index: 1000;    
+  //  z-index: 1000;    
 }
+
+.cust-footer {
+    background-color: #222120;
+  //  color: #fff;    
+}
+
+.cust-text {
+    color: #fff !important;
+}
+
 
