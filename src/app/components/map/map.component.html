@@ -49,7 +49,7 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-4">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" checked>
+          <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" aria-label="Toggle points of interest" checked>
           <label class="form-check-label" for="flexSwitchPoints">
             Punts d'interès
           </label>
@@ -57,7 +57,7 @@
       </div>
       <div class="col-12 col-md-4 mb-3">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" checked>
+          <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" aria-label="Toggle tourist concentration heatmap" checked>
           <label class="form-check-label" for="flexSwitchHeatmap">
             Concentració Turística
           </label>
@@ -65,7 +65,7 @@
       </div>
       <div class="col-12 col-md-4 mb-3">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showNoise" (change)="toggleNoiseHeatmap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchNoise" checked>
+          <input [(ngModel)]="showNoise" (change)="toggleNoiseHeatmap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchNoise" aria-label="Toggle noise levels" checked>
           <label class="form-check-label" for="flexSwitchNoise">
             Niveles de soroll
           </label>
