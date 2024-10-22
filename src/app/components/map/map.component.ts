@@ -86,8 +86,6 @@ export class MapComponent implements AfterViewInit {
   private clearMarkers(): void {
     this.markers.forEach((marker) => this.map.removeLayer(marker));
       this.markers = [];
-    }
-
   }
 
   loadData() {
