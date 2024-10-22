@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import { MapApiService } from './map-api.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
-import { ConcentrationData } from '../interfaces/tourism.interface';
+import { HttpClient } from '@angular/common/http';
+import { ConcentrationData } from '../interfaces/tourism.interface'
 
 describe('MapApiService', () => {
   let service: MapApiService;
