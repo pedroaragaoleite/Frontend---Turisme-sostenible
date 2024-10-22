@@ -87,6 +87,8 @@ export class MapComponent implements AfterViewInit {
     this.markers.forEach((marker) => this.map.removeLayer(marker));
     this.markers = [];
 
+  }
+
   loadData() {
     this.mapService.loadConcentrationData().subscribe(data => {
       this.data = data;
