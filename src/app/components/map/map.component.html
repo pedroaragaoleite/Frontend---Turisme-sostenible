@@ -38,15 +38,23 @@
 
 <div id="map" class="mt-4 shadow-sm rounded"></div>
 
-<div class="form-check" >
-    <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-    <label class="form-check-label" for="flexCheckDefault">
-      Ponts de interess
-    </label>
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-4 mb-3">
+      <div class="form-check form-switch">
+        <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input" type="checkbox" id="flexSwitchPoints" checked>
+        <label class="form-check-label" for="flexSwitchPoints">
+          Punts d'interès
+        </label>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+      <div class="form-check form-switch">
+        <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input" type="checkbox" id="flexSwitchHeatmap" checked>
+        <label class="form-check-label" for="flexSwitchHeatmap">
+          Concentració Turística
+        </label>
+      </div>
+    </div>
   </div>
-  <div class="form-check">
-    <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-    <label class="form-check-label" for="flexCheckChecked">
-      Concentració Turistica
-    </label>
-  </div>
+</div>
