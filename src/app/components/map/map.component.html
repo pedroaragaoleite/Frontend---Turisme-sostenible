@@ -16,5 +16,25 @@
     <option value="otro">Otro</option>
   </select>
 </div>
+<div class="container my-4">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <select class="form-select shadow-sm" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
+        <option value="">Tots els mesos</option>
+        <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
+          {{ month }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <select class="form-select shadow-sm" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
+        <option value="">Tots els dies de la setmana</option>
+        <option *ngFor="let weekday of weekdays" [value]="weekday">
+          {{ weekday }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
 
-<div id="map"></div>
+<div id="map" class="mt-4 shadow-sm rounded"></div>
