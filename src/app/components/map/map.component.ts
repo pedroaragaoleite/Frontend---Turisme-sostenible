@@ -46,7 +46,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   loadData() {
-    this.mapService.loadTouristData().subscribe(data => {
+    this.mapService.loadConcentrationData().subscribe(data => {
       this.data = data;
       this.monthlyData = this.dataFilterService.filterDataByMonthAndWeekday(this.data);
       this.updateHeatmap();
@@ -68,17 +68,21 @@ export class MapComponent implements AfterViewInit {
     this.heatmapData = filteredData.map(point => [
       parseFloat(point.lat),
       parseFloat(point.lon),
-      0.3
+      0.7
     ] as L.HeatLatLngTuple);
 
     if (this.heatmapData.length > 0) {
+      const maxIntensity = Math.max(...this.heatmapData.map(point => point[2]));
+      const radius = this.heatmapData.length > 1000 ? 10 : 25;
+      const blur = this.heatmapData.length > 1000 ? 15 : 30;
+
       this.heatmapLayer = L.heatLayer(this.heatmapData, {
-        radius: 5,
-        blur: 10,
-        maxZoom: 17,
-        minOpacity: 0.3,
-        max: 0.7,
-        gradient: {0.4: 'yellow', 0.65: 'orange', 1: 'red'}
+        radius: radius,
+        blur: blur,
+        maxZoom: 18,
+        max: maxIntensity,
+        minOpacity: 0.4,
+        gradient: {0.4: 'blue', 0.6: 'cyan', 0.7: 'lime', 0.8: 'yellow', 1: 'red'}
       }).addTo(this.map);
     }
   }

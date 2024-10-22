@@ -1,26 +1,22 @@
-<div class="container mt-3 mb-3">
-  <div class="row">
+<div class="container my-4">
+  <div class="row g-3">
     <div class="col-md-6">
-      <div class="form-group">
-        <select class="form-control" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
-          <option value="">Todos los meses</option>
-          <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
-            {{ month }}
-          </option>
-        </select>
-      </div>
+      <select class="form-select shadow-sm" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
+        <option value="">Tots els mesos</option>
+        <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
+          {{ month }}
+        </option>
+      </select>
     </div>
     <div class="col-md-6">
-      <div class="form-group">
-        <select class="form-control" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
-          <option value="">Todos los días</option>
-          <option *ngFor="let weekday of weekdays" [value]="weekday">
-            {{ weekday }}
-          </option>
-        </select>
-      </div>
+      <select class="form-select shadow-sm" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
+        <option value="">Tots els dies de la setmana</option>
+        <option *ngFor="let weekday of weekdays" [value]="weekday">
+          {{ weekday }}
+        </option>
+      </select>
     </div>
   </div>
 </div>
 
-<div id="map" class="mb-3"></div>
+<div id="map" class="mt-4 shadow-sm rounded"></div>

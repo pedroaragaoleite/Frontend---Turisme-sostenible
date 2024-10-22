@@ -5,10 +5,10 @@ import { ConcentrationData } from '../models/interface';
   providedIn: 'root'
 })
 export class DataFilterService {
-  private weekdays: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  private weekdays: string[] = ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'];
   private months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+    'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
   ];
 
   getWeekdays(): string[] {

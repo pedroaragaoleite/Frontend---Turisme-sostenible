@@ -31,7 +31,7 @@ export class MapApiService {
     return this.map;
   }
 
-  loadTouristData(): Observable<ConcentrationData[]> {
+  loadConcentrationData(): Observable<ConcentrationData[]> {
     return this.http.get<ConcentrationData[]>('/assets/csvjson.json')
   }
 }
