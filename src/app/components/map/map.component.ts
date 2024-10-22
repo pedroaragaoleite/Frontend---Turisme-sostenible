@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapApiService } from '../../core/services/map-api.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 
 @Component({

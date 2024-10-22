@@ -22,10 +22,4 @@ export class MapApiService {
     }).addTo(this.map);
   }
 
-
-getMap() {
-
-} 
-
-
 }
