@@ -1,0 +1,108 @@
+.navbar-brand {
+    background-color: transparent;
+}
+
+header {
+    background-color: black;
+    color: #9e9898;
+    padding: 16px;
+}
+
+.fab {
+    color: #9e9898;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.fab:hover {
+    color: aliceblue;
+    transform: scale(1.4);
+}
+
+.cust-nav-link {
+    color: #9e9898;
+    transition: all 0.2s ease;
+}
+
+.cust-nav-link:hover {
+    color: aliceblue;
+    transform: scale(1.2);
+}
+
+.nav-item {
+    flex-wrap: wrap;
+}
+
+.slash {
+    color: #4b4848;
+}
+
+.cust-navbar {
+    padding: 3px;
+    border-top: 1px solid #4b4848;
+    border-bottom: 1px solid #4b4848;
+}
+.cust-nav-item-1, .cust-nav-item-2 {
+    padding: 6px;
+    border-left: 1px solid #4b4848;
+}
+
+.nav-link {
+    color: #9e9898;
+}
+
+.cust-nav-item-2 {
+    border-right: 1px solid #4b4848;
+}
+
+.nav-link:hover {
+    color: aliceblue;
+}
+
+.active {
+    color: aliceblue;
+}
+
+.nav-link.active {
+    color: aliceblue;
+    font-weight: 550;
+  }
+
+.active-border-bottom {
+    border-bottom: 2px solid blue;
+}  
+
+//----------------------------FOOTER--------------------------------------------
+
+
+.footer {
+   // background-color: black;       
+   // color: white;                
+   // padding: 20px 0;              
+}
+
+.footer a {
+    color: #fff;               
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;   
+}
+
+.footer p {
+    margin: 0;                   
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    z-index: 1000;    
+}
+
