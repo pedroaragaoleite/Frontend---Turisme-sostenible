@@ -1,24 +1,25 @@
-<div>
-  <label for="categoryFilter">Filtrar por categoría:</label>
-  <select id="categoryFilter" (change)="onCategoryFilterChange($event)">
-    <option value="">Todas</option>
-    <option value="Centre">Centre</option>
-    <option value="Jardins">Jardins</option>
-    <option value="Escola">Escola</option>
-    <option value="Mercat">Mercat</option>
-    <option value="Restaurant">Restaurant</option>
-    <option value="Parròquia">Parròquia</option>
-    <option value="Museu">Museu</option>
-    <option value="Parc">Parc</option>
-    <option value="Club">Club</option>
-    <option value="Palau">Palau</option>
-    <option value="Platja">Platja</option>
-    <option value="otro">Otro</option>
-  </select>
-</div>
 <div class="container my-4">
   <div class="row g-3">
-    <div class="col-md-6">
+    <div class="col-12 col-md-4"></div>
+      <label for="categoryFilter">Filtrar por categoría:</label>
+      <select class="form-select shadow-sm" id="categoryFilter" (change)="onCategoryFilterChange($event)">
+        <option value="">Todas</option>
+        <option value="Centre">Centre</option>
+        <option value="Jardins">Jardins</option>
+        <option value="Escola">Escola</option>
+        <option value="Mercat">Mercat</option>
+        <option value="Restaurant">Restaurant</option>
+        <option value="Parròquia">Parròquia</option>
+        <option value="Museu" selected>Museu</option>
+        <option value="Parc">Parc</option>
+        <option value="Club">Club</option>
+        <option value="Palau">Palau</option>
+        <option value="Platja">Platja</option>
+        <option value="otro">Otro</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-4">
+      <label for="month-select">Seleccionar mes:</label>
       <select class="form-select shadow-sm" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
         <option value="">Tots els mesos</option>
         <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
@@ -26,7 +27,8 @@
         </option>
       </select>
     </div>
-    <div class="col-md-6">
+    <div class="col-12 col-md-4">
+      <label for="weekday-select">Seleccionar día de la semana:</label>
       <select class="form-select shadow-sm" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
         <option value="">Tots els dies de la setmana</option>
         <option *ngFor="let weekday of weekdays" [value]="weekday">
@@ -35,6 +37,7 @@
       </select>
     </div>
   </div>
-</div>
+
+
 
 <div id="map" class="mt-4 shadow-sm rounded"></div>

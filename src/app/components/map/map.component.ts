@@ -22,7 +22,7 @@ export class MapComponent implements AfterViewInit {
   private dataFilterService = inject(DataFilterService);
   private map!: L.Map;
   private markers: L.Marker[] = [];
-  private selectedCategory: string = '';
+  private selectedCategory: string = 'Museu';
   private data: ConcentrationData[] = [];
   private heatmapData: L.HeatLatLngTuple[] = [];
   private heatmapLayer: L.HeatLayer | null = null;
@@ -85,7 +85,8 @@ export class MapComponent implements AfterViewInit {
 
   private clearMarkers(): void {
     this.markers.forEach((marker) => this.map.removeLayer(marker));
-    this.markers = [];
+      this.markers = [];
+    }
 
   loadData() {
     this.mapService.loadConcentrationData().subscribe(data => {
