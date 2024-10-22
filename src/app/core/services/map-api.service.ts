@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ConcentrationData } from '../models/interface';
+import { ConcentrationData } from '../interfaces/tourism.interface';
 
 @Injectable({
   providedIn: 'root'
