@@ -115,8 +115,7 @@ export class MapComponent implements AfterViewInit {
     if (this.noiseHeatmapLayer) {
       this.map.removeLayer(this.noiseHeatmapLayer);
     }
-
-    // Only create and add the noise heatmap layer if showNoise is true
+    
     if (this.showNoise) {
       const filteredNoiseData = this.dataFilterService.getFilteredData(
         this.monthlyNoiseData,
