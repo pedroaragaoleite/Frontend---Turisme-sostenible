@@ -8,7 +8,7 @@ import { TourismDataService } from '../../core/services/tourism-data.service';
 import { TourismPoint } from '../../core/interfaces/tourism.interface';
 import proj4 from 'proj4';
 import 'leaflet.heat';
-import { ConcentrationData } from '../../core/models/interface';
+import { ConcentrationData } from '../../core/interfaces/tourism.interface';
 
 @Component({
   selector: 'app-map',

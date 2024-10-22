@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConcentrationData } from '../models/interface';
+import { ConcentrationData } from '../interfaces/tourism.interface';
 
 @Injectable({
   providedIn: 'root'
