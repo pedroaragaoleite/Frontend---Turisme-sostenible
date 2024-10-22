@@ -8,7 +8,8 @@ import proj4 from 'proj4';
 import { MapApiService } from '../../core/services/map-api.service';
 import { DataFilterService } from '../../core/services/data-filter.service';
 import { TourismDataService } from '../../core/services/tourism-data.service';
-import { TourismPoint, ConcentrationData } from '../../core/interfaces/tourism.interface';
+import { TourismPoint, ConcentrationData, NoiseData } from '../../core/interfaces/tourism.interface';
+import { NoiseServiceService } from '../../core/services/noise-service.service';
 
 @Component({
   selector: 'app-map',
@@ -20,16 +21,19 @@ import { TourismPoint, ConcentrationData } from '../../core/interfaces/tourism.i
 export class MapComponent implements AfterViewInit {
   private mapService = inject(MapApiService);
   private dataFilterService = inject(DataFilterService);
+  private noiseService = inject(NoiseServiceService);
   private map!: L.Map;
   private markers: L.Marker[] = [];
   private selectedCategory: string = 'Museu';
   private data: ConcentrationData[] = [];
   private heatmapData: L.HeatLatLngTuple[] = [];
   private heatmapLayer: L.HeatLayer | null = null;
-
+  private noiseData: NoiseData[] = [];
+  private monthlyNoiseData: { [key: string]: { [key: string]: NoiseData[] } } = {};
+  private noiseHeatmapLayer: L.HeatLayer | null = null;
   showPoints = true;
   showPlaces = true;
-
+  showNoise = false;
   monthlyData: { [key: string]: { [key: string]: ConcentrationData[] } } = {};
   selectedMonth: string = '';
   months: string[];
@@ -46,6 +50,7 @@ export class MapComponent implements AfterViewInit {
     this.loadData();
     this.registerProj4Definitions();
     this.loadTourismPoints();
+    this.loadNoiseData();
   }
 
   initMap() {
@@ -64,7 +69,14 @@ export class MapComponent implements AfterViewInit {
     this.loadTourismPoints();
   }
 
-  public loadTourismPoints(): void {
+  private loadNoiseData(): void {
+    this.noiseService.loadNoiseData().subscribe(data => {
+      this.noiseData = data;
+      this.monthlyNoiseData = this.dataFilterService.filterDataByMonthAndWeekday(this.noiseData);
+    });
+  }
+
+  private loadTourismPoints(): void {
     this.clearMarkers();
 
     this.tourismService.getTourismData().subscribe((data: TourismPoint[]) => {
@@ -97,6 +109,44 @@ export class MapComponent implements AfterViewInit {
       this.monthlyData = this.dataFilterService.filterDataByMonthAndWeekday(this.data);
       this.updateHeatmap();
     });
+  }
+
+  private updateNoiseHeatmap(): void {
+    if (this.noiseHeatmapLayer) {
+      this.map.removeLayer(this.noiseHeatmapLayer);
+    }
+    
+    if (this.showNoise) {
+      const filteredNoiseData = this.dataFilterService.getFilteredData(
+        this.monthlyNoiseData,
+        this.selectedMonth,
+        this.selectedWeekday,
+        this.noiseData
+      );
+
+      const heatmapData = filteredNoiseData.map(point => [
+        point.lat,
+        point.lon,
+        this.normalizeNoiseLevel(point.sound_level_mean)
+      ] as L.HeatLatLngTuple);
+
+      if (heatmapData.length > 0) {
+        this.noiseHeatmapLayer = L.heatLayer(heatmapData, {
+          radius: 25,
+          blur: 15,
+          maxZoom: 18,
+          max: 1,
+          minOpacity: 0.4,
+          gradient: {0.4: 'green', 0.5: 'yellow', 0.6: 'orange', 0.8: 'red', 1: 'purple'}
+        }).addTo(this.map);
+      }
+    }
+  }
+
+  private normalizeNoiseLevel(soundLevel: number): number {
+    const minDecibels = 38;
+    const maxDecibels = 81;
+    return (soundLevel - minDecibels) / (maxDecibels - minDecibels);
   }
 
   updateHeatmap() {
@@ -135,11 +185,16 @@ export class MapComponent implements AfterViewInit {
 
   onMonthSelect() {
     this.updateHeatmap();
+    if (this.showNoise) {
+      this.updateNoiseHeatmap();
+    }
   }
 
   onWeekdaySelect() {
     this.updateHeatmap();
-
+    if (this.showNoise) {
+      this.updateNoiseHeatmap();
+    }
   }
 
   toggleMarkers(): void {
@@ -160,6 +215,16 @@ export class MapComponent implements AfterViewInit {
       }
     } else {
       this.updateHeatmap();
+    }
+  }
+
+  toggleNoiseHeatmap(): void {
+    if (!this.showNoise) {
+      if (this.noiseHeatmapLayer) {
+        this.map.removeLayer(this.noiseHeatmapLayer);
+      }
+    } else {
+      this.updateNoiseHeatmap();
     }
   }
 }

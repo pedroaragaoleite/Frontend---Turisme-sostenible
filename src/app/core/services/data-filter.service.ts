@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConcentrationData } from '../interfaces/tourism.interface';
+import { ConcentrationData, NoiseData } from '../interfaces/tourism.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class DataFilterService {
     return this.months;
   }
 
-  filterDataByMonthAndWeekday(data: ConcentrationData[]): { [key: string]: { [key: string]: ConcentrationData[] } } {
-    const monthlyData: { [key: string]: { [key: string]: ConcentrationData[] } } = {};
+  filterDataByMonthAndWeekday<T extends { date: string }>(data: T[]): { [key: string]: { [key: string]: T[] } } {
+    const monthlyData: { [key: string]: { [key: string]: T[] } } = {};
     data.forEach(point => {
       const pointDate = new Date(point.date);
       const monthKey = (pointDate.getMonth() + 1).toString().padStart(2, '0');
@@ -37,12 +37,12 @@ export class DataFilterService {
     return monthlyData;
   }
 
-  getFilteredData(
-    monthlyData: { [key: string]: { [key: string]: ConcentrationData[] } },
+  getFilteredData<T>(
+    monthlyData: { [key: string]: { [key: string]: T[] } },
     selectedMonth: string,
     selectedWeekday: string,
-    allData: ConcentrationData[]
-  ): ConcentrationData[] {
+    allData: T[]
+  ): T[] {
     if (selectedMonth && selectedWeekday) {
       return monthlyData[selectedMonth]?.[selectedWeekday] || [];
     } else if (selectedMonth) {
