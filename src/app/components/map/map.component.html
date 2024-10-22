@@ -1,1 +1,28 @@
-<div id="map"></div>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="month-select">Select Month:</label>
+        <select class="form-control" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
+          <option value="">All Months</option>
+          <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
+            {{ month }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="weekday-select">Select Weekday:</label>
+        <select class="form-control" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
+          <option value="">All Weekdays</option>
+          <option *ngFor="let weekday of weekdays" [value]="weekday">
+            {{ weekday }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="map" class="mb-3"></div>
