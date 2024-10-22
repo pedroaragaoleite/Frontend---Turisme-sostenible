@@ -14,7 +14,7 @@ export interface ConcentrationData {
 }
 
 export interface NoiseData {
-  Id_Instal: number;
+  Id_Instal?: number;
   date: string;
   sound_level_mean: number;
   lat: number;
