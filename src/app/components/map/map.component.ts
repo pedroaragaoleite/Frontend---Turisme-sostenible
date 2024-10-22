@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { MapApiService } from '../../core/services/map-api.service';
 import { DataFilterService } from '../../core/services/data-filter.service';
 import * as L from 'leaflet';
@@ -26,6 +26,9 @@ export class MapComponent implements AfterViewInit {
   private data: ConcentrationData[] = [];
   private heatmapData: L.HeatLatLngTuple[] = [];
   private heatmapLayer: L.HeatLayer | null = null;
+
+  showPoints = true;
+  showPlaces = true;
 
   monthlyData: { [key: string]: { [key: string]: ConcentrationData[] } } = {};
   selectedMonth: string = '';
@@ -137,5 +140,14 @@ export class MapComponent implements AfterViewInit {
   onWeekdaySelect() {
     this.updateHeatmap();
 
+  }
+
+  toggleMarkers(): void {
+    if (!this.showPoints) {
+           
+      this.clearMarkers();
+    } else {
+      this.loadTourismPoints();
+    }
   }
 }
