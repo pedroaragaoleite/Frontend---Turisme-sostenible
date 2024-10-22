@@ -13,7 +13,6 @@ export class MapApiService {
 
   constructor(private http: HttpClient) { }
 
-
   initializeMap(): void {
     this.map = L.map('map', {
       center: [41.3851, 2.1734], // Barcelona coordinates
@@ -34,4 +33,5 @@ export class MapApiService {
   loadConcentrationData(): Observable<ConcentrationData[]> {
     return this.http.get<ConcentrationData[]>('/assets/csvjson.json')
   }
+
 }
