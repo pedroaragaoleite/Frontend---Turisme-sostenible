@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { TourismDataService } from '../../core/services/tourism-data.service';
+import { MapApiService } from '../../core/services/map-api.service';
+import { DataFilterService } from '../../core/services/data-filter.service';
+import { of } from 'rxjs';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -8,7 +13,8 @@ describe('MapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MapComponent]
+      imports: [MapComponent],
+      providers:[ HttpClient, HttpHandler]
     })
     .compileComponents();
 

@@ -64,7 +64,7 @@ export class MapComponent implements AfterViewInit {
     this.loadTourismPoints();
   }
 
-  private loadTourismPoints(): void {
+  public loadTourismPoints(): void {
     this.clearMarkers();
 
     this.tourismService.getTourismData().subscribe((data: TourismPoint[]) => {

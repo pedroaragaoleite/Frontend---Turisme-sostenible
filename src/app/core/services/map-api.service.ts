@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ConcentrationData } from '../interfaces/tourism.interface';
 
 @Injectable({

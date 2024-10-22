@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TourismPoint } from '../interfaces/tourism.interface';
@@ -9,7 +9,9 @@ import { TourismPoint } from '../interfaces/tourism.interface';
 export class TourismDataService {
   private jsonUrl = 'assets/puntos-interes.json';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient)
+
+  constructor() {}
 
   getTourismData(): Observable<TourismPoint[]> {
     return this.http.get<TourismPoint[]>(this.jsonUrl);
