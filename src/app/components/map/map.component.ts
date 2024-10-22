@@ -43,7 +43,6 @@ export class MapComponent implements AfterViewInit {
 
   public onCategoryFilterChange(event: any): void {
     this.selectedCategory = event.target.value;
-    console.log('Categoría seleccionada:', this.selectedCategory);
     this.loadTourismPoints();
   }
 
