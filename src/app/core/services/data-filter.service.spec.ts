@@ -1,14 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DataFilterService } from './data-filter.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+
+import { ConcentrationData } from '../interfaces/tourism.interface';
 
 describe('DataFilterService', () => {
   let service: DataFilterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [DataFilterService]
     });
     service = TestBed.inject(DataFilterService);
@@ -26,6 +27,26 @@ describe('DataFilterService', () => {
   it('should return months', () => {
     const months = service.getMonths();
     expect(months).toEqual(['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny','Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre']);
-    
+
   })
+
+  it('should filter data by month and weekday correctly', () => {
+    const mockData: ConcentrationData[] = [
+      { id: '1', date: '2019-10-10', lat: '41.0', lon: '2.0' }, // Dijous
+      { id: '2', date: '2019-08-07', lat: '42.0', lon: '3.0' }, // Dimecres
+      { id: '3', date: '2019-08-28', lat: '43.0', lon: '4.0' }, // Dimecres
+      { id: '4', date: '2019-10-05', lat: '44.0', lon: '5.0' }  // Dissabte
+    ];
+
+    const filtered = service.filterDataByMonthAndWeekday(mockData);
+
+    
+    expect(Object.keys(filtered)).toEqual(['10', '08']); // October, Agost
+    expect(Object.keys(filtered['08'])).toEqual(['Dimecres']); 
+    expect(filtered['08']['Dimecres'].length).toBe(2); 
+
+    expect(Object.keys(filtered['10'])).toEqual(['Dijous', 'Dissabte']); 
+    expect(filtered['10']['Dijous'].length).toBe(1);
+    expect(filtered['10']['Dissabte'].length).toBe(1);
+  });
 });
