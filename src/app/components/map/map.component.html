@@ -1,14 +1,14 @@
-<header class="bg-english-green text-white py-2 mb-3">
+<header class="bg-english-green text-white py-2 mb-3" role="banner">
     <div class="container">
         <h1 class="display-8">Tourist Trapp</h1>
     </div>  
 </header>
 
-<div id="filters" class="container my-2">
+<div id="filters" class="container my-2" role="form" aria-label="Filtres de mapa">
   <div class="row g-3">
     <div class="col-12 col-md-4">
       <label for="categoryFilter" class="form-label fw-bold">Categoria</label>
-      <select class="form-select" id="categoryFilter" (change)="onCategoryFilterChange($event)">
+      <select class="form-select" id="categoryFilter" (change)="onCategoryFilterChange($event)" aria-label="Selecciona una categoria">
         <option value="">Todas</option>
         <option value="Centre">Centre</option>
         <option value="Jardins">Jardins</option>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-12 col-md-4">
       <label for="month-select" class="form-label fw-bold">Mes</label>
-      <select class="form-select" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()">
+      <select class="form-select" id="month-select" [(ngModel)]="selectedMonth" (change)="onMonthSelect()" aria-label="Selecciona un mes">
         <option value="">Tots els mesos</option>
         <option *ngFor="let month of months; let i = index" [value]="(i + 1).toString().padStart(2, '0')">
           {{ month }}
@@ -35,7 +35,7 @@
     </div>
     <div class="col-12 col-md-4">
       <label for="weekday-select" class="form-label fw-bold">Dia de la setmana</label>
-      <select class="form-select" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()">
+      <select class="form-select" id="weekday-select" [(ngModel)]="selectedWeekday" (change)="onWeekdaySelect()" aria-label="Selecciona un dia de la setmana">
         <option value="">Tots els dies de la setmana</option>
         <option *ngFor="let weekday of weekdays" [value]="weekday">
           {{ weekday }}
@@ -45,11 +45,11 @@
   </div>
 </div>
 
-<div class="container my-3">
+<div class="container my-3" role="group" aria-label="Opcions de visualització del mapa">
     <div class="row justify-content-center">
       <div class="col-12 col-md-4">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" aria-label="Toggle points of interest" checked>
+          <input [(ngModel)]="showPoints" (change)="toggleMarkers()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchPoints" aria-label="Mostra o amaga punts d'interès" checked>
           <label class="form-check-label" for="flexSwitchPoints">
             Punts d'interès
           </label>
@@ -57,7 +57,7 @@
       </div>
       <div class="col-12 col-md-4 mb-3">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" aria-label="Toggle tourist concentration heatmap" checked>
+          <input [(ngModel)]="showPlaces" (change)="toggleHeatMap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchHeatmap" aria-label="Mostra o amaga mapa de calor de concentració turística" checked>
           <label class="form-check-label" for="flexSwitchHeatmap">
             Concentració Turística
           </label>
@@ -65,7 +65,7 @@
       </div>
       <div class="col-12 col-md-4 mb-3">
         <div class="form-check form-switch">
-          <input [(ngModel)]="showNoise" (change)="toggleNoiseHeatmap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchNoise" aria-label="Toggle noise levels" checked>
+          <input [(ngModel)]="showNoise" (change)="toggleNoiseHeatmap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchNoise" aria-label="Mostra o amaga nivells de soroll" checked>
           <label class="form-check-label" for="flexSwitchNoise">
             Niveles de soroll
           </label>
@@ -74,4 +74,4 @@
     </div>
   </div>
 
-<div id="map"></div>
+<div id="map" role="application" aria-label="Mapa interactiu"></div>
