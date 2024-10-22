@@ -2,8 +2,10 @@ import { Component, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MapApiService } from '../../core/services/map-api.service';
+import { DataFilterService } from '../../core/services/data-filter.service';
 import * as L from 'leaflet';
 import 'leaflet.heat';
+import { ConcentrationData } from '../../core/models/interface';
 
 @Component({
   selector: 'app-map',
@@ -14,19 +16,22 @@ import 'leaflet.heat';
 })
 export class MapComponent implements AfterViewInit {
   private mapService = inject(MapApiService);
+  private dataFilterService = inject(DataFilterService);
   private map!: L.Map;
-  private data: TouristData[] = [];
+  private data: ConcentrationData[] = [];
   private heatmapData: L.HeatLatLngTuple[] = [];
   private heatmapLayer: L.HeatLayer | null = null;
 
-  monthlyData: { [key: string]: { [key: string]: TouristData[] } } = {};
+  monthlyData: { [key: string]: { [key: string]: ConcentrationData[] } } = {};
   selectedMonth: string = '';
-  months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
+  months: string[];
   selectedWeekday: string = '';
-  weekdays: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  weekdays: string[];
+
+  constructor() {
+    this.months = this.dataFilterService.getMonths();
+    this.weekdays = this.dataFilterService.getWeekdays();
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -43,25 +48,8 @@ export class MapComponent implements AfterViewInit {
   loadData() {
     this.mapService.loadTouristData().subscribe(data => {
       this.data = data;
-      this.filterDataByMonthAndWeekday();
+      this.monthlyData = this.dataFilterService.filterDataByMonthAndWeekday(this.data);
       this.updateHeatmap();
-    });
-  }
-
-  filterDataByMonthAndWeekday() {
-    this.monthlyData = {};
-    this.data.forEach(point => {
-      const pointDate = new Date(point.date);
-      const monthKey = (pointDate.getMonth() + 1).toString().padStart(2, '0');
-      const weekday = this.weekdays[pointDate.getDay()];
-      
-      if (!this.monthlyData[monthKey]) {
-        this.monthlyData[monthKey] = {};
-      }
-      if (!this.monthlyData[monthKey][weekday]) {
-        this.monthlyData[monthKey][weekday] = [];
-      }
-      this.monthlyData[monthKey][weekday].push(point);
     });
   }
 
@@ -70,37 +58,27 @@ export class MapComponent implements AfterViewInit {
       this.map.removeLayer(this.heatmapLayer);
     }
 
-    let filteredData: TouristData[] = [];
-
-    if (this.selectedMonth && this.selectedWeekday) {
-      // Both month and weekday selected
-      filteredData = this.monthlyData[this.selectedMonth]?.[this.selectedWeekday] || [];
-    } else if (this.selectedMonth) {
-      // Only month selected
-      filteredData = Object.values(this.monthlyData[this.selectedMonth] || {}).flat();
-    } else if (this.selectedWeekday) {
-      // Only weekday selected
-      filteredData = Object.values(this.monthlyData)
-        .flatMap(monthData => monthData[this.selectedWeekday] || []);
-    } else {
-      // No filters selected
-      filteredData = this.data;
-    }
+    const filteredData = this.dataFilterService.getFilteredData(
+      this.monthlyData,
+      this.selectedMonth,
+      this.selectedWeekday,
+      this.data
+    );
 
     this.heatmapData = filteredData.map(point => [
-      point.latitude,
-      point.longitude,
-      1
+      parseFloat(point.lat),
+      parseFloat(point.lon),
+      0.3
     ] as L.HeatLatLngTuple);
 
     if (this.heatmapData.length > 0) {
       this.heatmapLayer = L.heatLayer(this.heatmapData, {
-        radius: 25,
-        blur: 15,
+        radius: 5,
+        blur: 10,
         maxZoom: 17,
         minOpacity: 0.3,
-        max: 1.0,
-        gradient: {0.4: 'blue', 0.65: 'lime', 1: 'red'}
+        max: 0.7,
+        gradient: {0.4: 'yellow', 0.65: 'orange', 1: 'red'}
       }).addTo(this.map);
     }
   }
@@ -112,11 +90,4 @@ export class MapComponent implements AfterViewInit {
   onWeekdaySelect() {
     this.updateHeatmap();
   }
-}
-
-interface TouristData {
-  id: number;
-  date: string;
-  latitude: number;
-  longitude: number;
 }

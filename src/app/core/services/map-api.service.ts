@@ -3,13 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-interface TouristData {
-  id: number;
-  date: string;
-  latitude: number;
-  longitude: number;
-}
+import { ConcentrationData } from '../models/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,38 +31,7 @@ export class MapApiService {
     return this.map;
   }
 
-  loadTouristData(): Observable<TouristData[]> {
-    return this.http.get('assets/dummy_turist_concentration.csv', { responseType: 'text' })
-      .pipe(
-        map(csv => this.parseCSV(csv))
-      );
+  loadTouristData(): Observable<ConcentrationData[]> {
+    return this.http.get<ConcentrationData[]>('/assets/csvjson.json')
   }
-
-  private parseCSV(csv: string): TouristData[] {
-    const lines = csv.split('\n');
-    const result: TouristData[] = [];
-    const headers = lines[0].split(',');
-
-    for (let i = 1; i < lines.length; i++) {
-      const obj: any = {};
-      const currentLine = lines[i].split(',');
-
-      if (currentLine.length === headers.length) {
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = j > 1 ? parseFloat(currentLine[j]) : currentLine[j];
-        }
-        result.push(obj as TouristData);
-      }
-    }
-
-    return result;
-  }
-
-  // addMarkersToMap(data: TouristData[]): void {
-  //   data.forEach(point => {
-  //     L.marker([point.latitude, point.longitude])
-  //       .addTo(this.map)
-  //       .bindPopup(`ID: ${point.id}<br>Date: ${point.date}`);
-  //   });
-  // }
 }
