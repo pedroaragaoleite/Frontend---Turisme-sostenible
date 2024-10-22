@@ -63,6 +63,14 @@
           </label>
         </div>
       </div>
+      <div class="col-12 col-md-4 mb-3">
+        <div class="form-check form-switch">
+          <input [(ngModel)]="showNoise" (change)="toggleNoiseHeatmap()" class="form-check-input bg-english-green-light" type="checkbox" id="flexSwitchNoise" checked>
+          <label class="form-check-label" for="flexSwitchNoise">
+            Niveles de soroll
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 
