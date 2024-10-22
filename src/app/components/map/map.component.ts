@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MapApiService } from '../../core/services/map-api.service';
 import { DataFilterService } from '../../core/services/data-filter.service';
 import * as L from 'leaflet';
+import { TourismDataService } from '../../core/services/tourism-data.service';
+import { TourismPoint } from '../../core/interfaces/tourism.interface';
+import proj4 from 'proj4';
 import 'leaflet.heat';
 import { ConcentrationData } from '../../core/models/interface';
 
@@ -12,12 +15,14 @@ import { ConcentrationData } from '../../core/models/interface';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.scss'
+  styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit {
   private mapService = inject(MapApiService);
   private dataFilterService = inject(DataFilterService);
   private map!: L.Map;
+  private markers: L.Marker[] = [];
+  private selectedCategory: string = '';
   private data: ConcentrationData[] = [];
   private heatmapData: L.HeatLatLngTuple[] = [];
   private heatmapLayer: L.HeatLayer | null = null;
@@ -26,9 +31,9 @@ export class MapComponent implements AfterViewInit {
   selectedMonth: string = '';
   months: string[];
   selectedWeekday: string = '';
-  weekdays: string[];
+  weekdays: string[]
 
-  constructor() {
+  constructor(private tourismService: TourismDataService) {
     this.months = this.dataFilterService.getMonths();
     this.weekdays = this.dataFilterService.getWeekdays();
   }
@@ -36,6 +41,8 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
     this.loadData();
+    this.registerProj4Definitions();
+    this.loadTourismPoints();
   }
 
   initMap() {
@@ -44,6 +51,41 @@ export class MapComponent implements AfterViewInit {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
   }
+
+  private registerProj4Definitions(): void {
+    proj4.defs('EPSG:25831', '+proj=utm +zone=31 +datum=WGS84 +units=m +no_defs +type=crs');
+  }
+
+  public onCategoryFilterChange(event: any): void {
+    this.selectedCategory = event.target.value;
+    this.loadTourismPoints();
+  }
+
+  private loadTourismPoints(): void {
+    this.clearMarkers();
+
+    this.tourismService.getTourismData().subscribe((data: TourismPoint[]) => {
+      data.forEach((point) => {
+        const lat = point.lat;
+        const lon = point.lon;
+
+        const isCategoryMatch = point.category === this.selectedCategory || this.selectedCategory === '';
+
+        if (isCategoryMatch && lat && lon) {
+          const latLng = L.latLng(lat, lon);
+          const marker = L.marker(latLng)
+            .addTo(this.map)
+            .bindPopup(`<strong>${point.name}</strong><br>${point.address}`);
+
+          this.markers.push(marker);
+        }
+      });
+    });
+  }
+
+  private clearMarkers(): void {
+    this.markers.forEach((marker) => this.map.removeLayer(marker));
+    this.markers = [];
 
   loadData() {
     this.mapService.loadConcentrationData().subscribe(data => {
@@ -93,5 +135,6 @@ export class MapComponent implements AfterViewInit {
 
   onWeekdaySelect() {
     this.updateHeatmap();
+
   }
 }
